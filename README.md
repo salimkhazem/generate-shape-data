@@ -8,5 +8,7 @@ The script takes two input:
 
 ```bash 
 python generate_data.py NUMBER_IMAGES_PER_CLASS IMG_SIZE 
-
 ```
+
+## Output 
+The generated images will be stored in folder 'dataset'
