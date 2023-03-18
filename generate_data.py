@@ -54,6 +54,7 @@ def generate_(shape_name):
     return img
 
 count = 0
+print("----- Generating Dataset -----")
 for i in tqdm(range(num_classes), total=num_classes):
     shape_name = shape_names[i]
     for j in range(num_imgs_per_class):
@@ -64,6 +65,7 @@ for i in tqdm(range(num_classes), total=num_classes):
         df.loc[count, 'label'] = i
         cv2.imwrite(filename, img)
         count += 1
-print(f'Images generated')
+print(f'{num_classes*num_imgs_per_class} images generated')
+print("Distribution of the data:")
 print(df.label.value_counts())
 df.to_csv("./dataset.csv", index=False)
