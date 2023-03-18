@@ -18,23 +18,27 @@ if not os.path.exists(output):
 
 def generate_(shape_name):
     img = np.zeros((img_size, img_size), dtype=np.uint8)
-    center = (img_size // 2, img_size // 2)
+    center = (random.randint(img_size // 4, 3 * img_size // 4), random.randint(img_size // 4, 3 * img_size // 4))
     if shape_name == 'circle':
         radius = img_size // 4 - line_width // 2
         cv2.circle(img, center, radius, 255, line_width)
     elif shape_name == 'square':
         side = img_size // 2 - line_width // 2
+        side = min(center[0], center[1], img_size - center[0], img_size - center[1])  - line_width // 2
         pt1 = (center[0] - side // 2, center[1] - side // 2)
         pt2 = (center[0] + side // 2, center[1] + side // 2)
         cv2.rectangle(img, pt1, pt2, 255, line_width)
     elif shape_name == 'rectangle':
-        width = img_size // 2 - line_width // 2
+        width = img_size // 4 - line_width // 2
         height = img_size // 4 - line_width // 2
+        width = min(center[0], img_size - center[0]) - line_width // 2
+        height = min(center[1], img_size - center[1]) - line_width // 2
         pt1 = (center[0] - width // 2, center[1] - height // 2)
         pt2 = (center[0] + width // 2, center[1] + height // 2)
         cv2.rectangle(img, pt1, pt2, 255, line_width)
     elif shape_name == 'triangle':
-        side = img_size // 2 - line_width // 2
+        side = img_size // 4 - line_width // 2
+        side = min(center[0], center[1], img_size - center[0], img_size - center[1]) * 2 - line_width // 2
         pt1 = (center[0], center[1] - side // 2)
         pt2 = (center[0] - side // 2, center[1] + side // 2)
         pt3 = (center[0] + side // 2, center[1] + side // 2)
@@ -43,9 +47,10 @@ def generate_(shape_name):
     elif shape_name == 'polygon':
         pts = []
         poly_side = 5
+        r = min(center[0], center[1], img_size - center[0], img_size - center[1]) - line_width // 2
         for i in range(poly_side):
             theta = i * (360 // poly_side)
-            r = random.randint(img_size // 4 - line_width, img_size // 2)
+            #r = random.randint(img_size // 4 - line_width, img_size // 2)
             x = center[0] + int(r * np.cos(np.deg2rad(theta)))
             y = center[1] + int(r * np.sin(np.deg2rad(theta)))
             pts.append([x, y])
