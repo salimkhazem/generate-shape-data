@@ -54,9 +54,9 @@ def generate_(shape_name):
     return img
 
 count = 0
-for i in range(num_classes):
+for i in tqdm(range(num_classes), total=num_classes):
     shape_name = shape_names[i]
-    for j in tqdm(range(num_imgs_per_class), total=num_imgs_per_class):
+    for j in range(num_imgs_per_class):
         img = generate_(shape_name)
         label = i
         filename = f'{output}/{shape_name}_{j}.png'
