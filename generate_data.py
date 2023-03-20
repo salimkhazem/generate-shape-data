@@ -65,10 +65,10 @@ for i in tqdm(range(num_classes), total=num_classes):
     for j in range(num_imgs_per_class):
         img = generate_(shape_name)
         label = i
-        filename = f'{output}/{shape_name}_{j}.png'
+        filename = f'{shape_name}_{j}.png'
         df.loc[count, 'path'] = filename
         df.loc[count, 'label'] = i
-        cv2.imwrite(filename, img)
+        cv2.imwrite(f"{output}/{filename}", img)
         count += 1
 print(f'{num_classes*num_imgs_per_class} images generated')
 print("Distribution of the data:")
