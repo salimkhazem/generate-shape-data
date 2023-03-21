@@ -66,7 +66,7 @@ for i in tqdm(range(num_classes), total=num_classes):
         img = generate_(shape_name)
         label = i
         filename = f'{shape_name}_{j}.png'
-        df.loc[count, 'path'] = filename
+        df.loc[count, 'path'] = filename.split(".")[0]
         df.loc[count, 'label'] = i
         cv2.imwrite(f"{output}/{filename}", img)
         count += 1
